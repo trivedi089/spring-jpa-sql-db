@@ -27,7 +27,7 @@ public class CourseMaterial {
     @OneToOne(
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
-            optional = false;
+            optional = false
     )
     @JoinColumn(
             name = "course_id",
