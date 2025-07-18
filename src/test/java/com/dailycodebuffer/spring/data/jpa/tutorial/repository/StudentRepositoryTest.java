@@ -23,7 +23,7 @@ class StudentRepositoryTest {
     public void saveStudent() {
         Student student = Student.builder()
                 .emailId("satyachbs007+" + UUID.randomUUID() + "@gmail.com")
-                .firstname("Satya")
+                .firstName("Satya")
                 .lastName("Trivedi")
 //                .guardianName("Dad")
 //                .guardianMobile("xxx")
@@ -34,18 +34,18 @@ class StudentRepositoryTest {
     }
 
     @Test
-    public void savesStudentWithGuardian(){
+    public void savesStudentWithGuardian() {
 
         Guardian guardian = Guardian.builder()
                 .name("Dada of Body")
-                .email("bodyday007@gmail.com")
+                .email("bodyday007+" + UUID.randomUUID() + "@gmail.com")
                 .mobile("85XXX")
                 .build();
 
         Student student = Student.builder()
-                .firstname("Bod")
+                .firstName("Bod")
                 .lastName("Trivedi")
-                .emailId("bod@gmail.com")
+                .emailId("bod+" + UUID.randomUUID() + "@gmail.com")  // unique email to avoid duplicate error
                 .guardian(guardian)
                 .build();
 
@@ -59,4 +59,48 @@ class StudentRepositoryTest {
         System.out.println("Student List = "+ studentsList);
     }
 
+    @Test
+    public void printStudentByFirstName(){
+
+        List<Student> students = studentRepository.findByFirstName("Satya");
+        System.out.println("Students = "+ students);
+    }
+
+    @Test
+    public void printStudentByFirstNameContaining(){
+
+        List<Student> students = studentRepository.findByFirstName("Sa");
+        System.out.println("Students Containing = "+ students);
+    }
+
+    @Test
+    public void printStudentBasedOnGuardianName(){
+
+        List<Student> students = studentRepository.findByGuardianName("Dada of Body");
+        System.out.println("Students = "+ students);
+    }
+
+    @Test
+    public void printGetStudentByEmailAddress(){
+        Student student = studentRepository.getStudentByEmailAddress("satyachbs007+" + UUID.randomUUID() + "@gmail.com");
+        System.out.println("Student = "+ student);
+    }
+
+    @Test
+    public void printGetStudentByEmailAddressNative(){
+        Student student = studentRepository.getStudentByEmailAddressNative("satyachbs007@gmail.com");
+        System.out.println("Student = "+ student);
+    }
+
+    @Test
+    public void printGetStudentByEmailAddressNativeNamedParam(){
+        Student student = studentRepository.getStudentByEmailAddressNative("satyachbs007@gmail.com");
+        System.out.println("Student = "+ student);
+    }
+
+    @Test
+    public void updateStudentNameByEmailIdTest(){
+
+        studentRepository.updateStudentNameByEmailId("satya trivedi","satyachbs007@gmail.com");
+    }
 }

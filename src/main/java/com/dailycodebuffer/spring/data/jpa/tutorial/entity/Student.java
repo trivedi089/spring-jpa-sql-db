@@ -29,7 +29,7 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
     generator = "student_sequence")
     private Long studentId;
-    private String firstname;
+    private String firstName;
     private String lastName;
 
     @Column(name="email_address",
